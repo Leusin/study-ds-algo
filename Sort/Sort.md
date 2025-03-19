@@ -135,8 +135,6 @@
 - **설명**: 데이터를 여러 개의 버킷에 나눈 후, 각 버킷을 개별적으로 정렬하여 합치는 방식입니다.
 - **평가**: 원소가 균일한 분포를 가진 데이터에 대해서는 매우 빠르지만, 적절한 버킷 개수와 정렬 방법을 선택하는 것이 중요합니다.
 
----
-
 # 참고
 
 - [Detailed Explanation of Sorting - LeetCode](https://leetcode.com/explore/learn/card/sorting/693/introduction/)
