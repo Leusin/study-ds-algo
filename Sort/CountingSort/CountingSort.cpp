@@ -13,9 +13,9 @@
  *
  */
 
-using namespace std;
-
 #include <iostream>
+
+using namespace std;
 
 /**
  * 오름차순 계수 정렬 함수
@@ -29,7 +29,7 @@ void asc_counting_sort(int arr[], int size)
         return;
     }
 
-    // 최소값과 최대값 찾기
+    // 최소값과 최대값 그리고 값의 범위 구하기
     int min_value = arr[0];
     int max_value = arr[0];
 
@@ -45,11 +45,11 @@ void asc_counting_sort(int arr[], int size)
         }
     }
 
-    // 값의 범위
     int range = max_value - min_value + 1;
 
     // 각 숫자의 등장 횟수 세기
     int *counts = new int[range]{0};
+
     for (int i = 0; i < size; i++)
     {
         counts[arr[i] - min_value]++;
@@ -63,8 +63,9 @@ void asc_counting_sort(int arr[], int size)
     }
 
     // 카운트 배열을 이용해 원소를 올바른 위치에 배치
-    // 안정 정렬을 위해 뒤에서부터 처리
+    // (안정 정렬을 위해 뒤에서부터 처리)
     int *sorted = new int[size];
+
     for (int i = size - 1; i >= 0; i--)
     {
         sorted[counts[arr[i] - min_value] - 1] = arr[i];
