@@ -20,11 +20,12 @@
 
 #include <iostream>
 #include <vector>
+#include <stack>
 
 using namespace std;
 
 /**
- * 재귀 호출 DFS
+ * 재귀 DFS
  * @param graph 탐색할 인접 리스트 그래프
  * @param visited 방문한 노드
  * @param start_node 현재 탐색 중인 노드
@@ -47,12 +48,12 @@ void dfs_rec(const vector<vector<int>> &graph, vector<bool> &visited,
 }
 
 /**
- * DFS
+ * DFS (재귀)
  * @param graph 탐색할 인접 리스트 그래프
  * @param start_node 탐색 시작 노드
  * @return 탐색 경로
  */
-vector<int> dfs(const vector<vector<int>> &graph, int start_node)
+vector<int> dfs_recursive(const vector<vector<int>> &graph, int start_node)
 {
     // 방문한 노드들을 저장할 벡터
     vector<int> path;
@@ -65,7 +66,7 @@ vector<int> dfs(const vector<vector<int>> &graph, int start_node)
 }
 
 /**
- * 비연결 그래프의 DFS
+ * 비연결 그래프의 DFS (재귀)
  * @param graph 탐색할 인접 리스트 그래프
  * @param start_node 탐색 시작 노드
  * @return 탐색 경로
@@ -94,9 +95,7 @@ void dfs_rec_disconnected(vector<vector<int>> &graph, vector<bool> &visited,
  */
 vector<int> dfs_disconnected(vector<vector<int>> &graph)
 {
-    // 방문한 노드들을 저장할 벡터
     vector<int> path;
-
     vector<bool> visited(graph.size(), false);
 
     for (int node = 0; node < graph.size(); node++)
@@ -104,6 +103,43 @@ vector<int> dfs_disconnected(vector<vector<int>> &graph)
         if (!visited[node])
         {
             dfs_rec_disconnected(graph, visited, node, path);
+        }
+    }
+
+    return path;
+}
+
+/**
+ * DFS (스택 기반 반복)
+ * @param graph 탐색할 인접 리스트 그래프
+ * @param start_node 탐색 시작 노드
+ * @return 탐색 경로
+ */
+vector<int> dfs_iterative(const vector<vector<int>> &graph, int start_node)
+{
+    vector<int> path;
+    vector<bool> visited(graph.size(), false);
+    stack<int> s;
+
+    s.push(start_node);
+    while (!s.empty())
+    {
+        int current = s.top();
+        s.pop();
+
+        if (!visited[current])
+        {
+            visited[current] = true;
+            path.push_back(current);
+
+            // 스택이므로 뒤에서부터 방문하도록 역순 삽입
+            for (auto it = graph[current].rbegin(); it != graph[current].rend(); it++)
+            {
+                if (!visited[*it])
+                {
+                    s.push(*it);
+                }
+            }
         }
     }
 
@@ -135,10 +171,11 @@ int main()
             {2}        // 6
         };
 
-    auto result1 = dfs(graph_connected, 0);
+    cout << "- 재귀 DFS 탐색 순서: ";
+    print_vector(dfs_recursive(graph_connected, 0));
 
-    cout << "무방향 그래프의 탐색: ";
-    print_vector(result1);
+    cout << "- 반복(스택 사용) DFS 탐색 순서: ";
+    print_vector(dfs_iterative(graph_connected, 0));
 
     vector<vector<int>> graph_disconnected =
         {
@@ -149,21 +186,14 @@ int main()
             {1},       // 4
             {2},       // 5
             {2},       // 6
-            {7},       // 7(단독 연결)
-            {8},       // 8(단독 연결)
-            {9},       // 9(단독 연결)
-            {8}        // 10(단독 연결)
+            {8},       // 7
+            {7},       // 8
+            {9},       // 9
+            {8}        // 10
         };
 
-    auto result2 = dfs(graph_disconnected, 0);
-
-    cout << "연결되지 않은 그래프의 탐색(dfs): ";
-    print_vector(result2);
-
-    auto result3 = dfs_disconnected(graph_disconnected);
-
-    cout << "연결되지 않은 그래프의 탐색(dfs_disconnected): ";
-    print_vector(result3);
+    cout << "- 비연결 그래프의 재귀 DFS 탐색: ";
+    print_vector(dfs_disconnected(graph_disconnected));
 
     return 0;
 }
