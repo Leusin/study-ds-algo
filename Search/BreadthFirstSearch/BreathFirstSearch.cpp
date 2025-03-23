@@ -24,12 +24,12 @@ using namespace std;
  * 시작점이 주어진 BFS
  * @param graph 탐색할 인접 리스트 그래프
  * @param start_node 탐색 시작 노드
- * @return 탐색한 노드들의 순서
+ * @return 탐색 경로
  */
 vector<int> bfs_from_source(const vector<vector<int>> &graph, int start_node)
 {
     // 방문한 노드들을 저장할 벡터
-    vector<int> traverse_result;
+    vector<int> path;
 
     // 그래프의 정점 수
     int vertex_size = graph.size();
@@ -50,7 +50,7 @@ vector<int> bfs_from_source(const vector<vector<int>> &graph, int start_node)
         node_to_visit.pop();
 
         // 현재 노드를 방문 결과 기록
-        traverse_result.push_back(current_node);
+        path.push_back(current_node);
 
         // 현재 노드의 이웃 노드 탐색
         for (int neighbor_node : graph[current_node])
@@ -64,18 +64,18 @@ vector<int> bfs_from_source(const vector<vector<int>> &graph, int start_node)
         }
     }
 
-    return traverse_result;
+    return path;
 }
 
 /**
  * 비연결 그래프의 BFS
  * @param graph 탐색할 인접 리스트 그래프
- * @return 탐색한 노드들의 순서
+ * @return 탐색 경로
  */
 vector<int> dfs_disconnected(vector<vector<int>> &graph)
 {
     // 방문한 노드들을 저장할 벡터
-    vector<int> traverse_result;
+    vector<int> path;
 
     // 그래프의 정점 수
     int vertex_size = graph.size();
@@ -101,7 +101,7 @@ vector<int> dfs_disconnected(vector<vector<int>> &graph)
                 node_to_visit.pop();
 
                 // 현재 노드를 방문 결과 기록
-                traverse_result.push_back(current_node);
+                path.push_back(current_node);
 
                 // 현재 노드의 이웃 노드 탐색
                 for (int neighbor_node : graph[current_node])
@@ -117,7 +117,7 @@ vector<int> dfs_disconnected(vector<vector<int>> &graph)
         }
     }
 
-    return traverse_result;
+    return path;
 }
 
 /**
