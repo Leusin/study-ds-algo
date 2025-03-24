@@ -19,7 +19,7 @@
 using namespace std;
 
 /**
- * 깊이 제한 DFS(Depth-Limited Search, DLS)
+ * 깊이 제한 탐색(Depth-Limited Search, DLS)
  * @param graph 인접 리스트 그래프
  * @param current_node 현재 탐색 중인 노드
  * @param target 목표 노드
@@ -33,15 +33,15 @@ bool dfs_limited(const vector<vector<int>> &graph, int current_node,
 {
     path.push_back(current_node);
 
+    // 목표 검사
     if (current_node == target)
     {
-        // 목표 노드를 찾음
         return true;
     }
 
+    // 깊이 검사
     if (depth_limit <= 0)
     {
-        // 깊이 제한을 초과함
         path.pop_back();
         return false;
     }
