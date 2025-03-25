@@ -33,13 +33,14 @@ struct second_comparion
 };
 
 /**
+ * 균일 비용 탐색 
  * @param graph 가중치 그래프 (인접 리스트)
  * @param start 시작 노드
  * @param goal 목표 노드
  * @param path 탐색 경로
  * @return 목표 노드를 찾으면 true, 아니면 false
  */
-int uniform_cost_search(vector<vector<pair<int, int>>> &graph, int start,
+int ucs(vector<vector<pair<int, int>>> &graph, int start,
                         int goal, deque<int> &path)
 {
     priority_queue<
@@ -65,7 +66,7 @@ int uniform_cost_search(vector<vector<pair<int, int>>> &graph, int start,
         // 목표 노드 도착 시 종료
         if (node == goal)
         {
-            // 경로 추적
+            // 추적한 경로 결과 저장
             path.clear();
             for (int cur = goal; cur != -1; cur = parent[cur])
             {
@@ -115,9 +116,9 @@ int main()
     for (int target : targets)
     {
         
-        cout << "[목표: " << target << "]\n";
+        cout << "[ucs 목표: " << target << "]\n";
         deque<int> path;
-        int cost = uniform_cost_search(graph, 0, target, path);
+        int cost = ucs(graph, 0, target, path);
 
         if (cost != -1)
         {
