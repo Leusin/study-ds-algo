@@ -27,7 +27,7 @@ const int g_col = 10;
 /**
  * 각 지점의 정보를 저장합니다.
  */
-struct cell
+struct Cell
 {
     int parent_i = -1; // 0 <= i < row
     int parent_j = -1; // 0 <= i < col
@@ -37,12 +37,11 @@ struct cell
     double h = FLT_MAX; // 목표 예상 비용
 };
 
-/// ----- 헬퍼 함수들 -----
-
 /**
  * 유효 범위에 있는지 검사하는 헬퍼 함수
  * @param row 행 인덱스
  * @param col 열 인덱스
+ * @return 유효한 범위이면 true, 아니면 false
  */
 bool is_valid(int row, int col)
 {
@@ -51,9 +50,10 @@ bool is_valid(int row, int col)
 
 /**
  * 해당 셀이 막혔는지 검사하는 헬퍼 함수
- * @param grid 지도
+ * @param grid 지도 (0: 장애물, 1: 통로)
  * @param row 행 인덱스
  * @param col 열 인덱스
+ * @return 셀이 통로일 경우 true, 장애물일 경우 false
  */
 bool is_unblocked(int grid[][g_col], int row, int col)
 {
@@ -62,9 +62,10 @@ bool is_unblocked(int grid[][g_col], int row, int col)
 
 /**
  * 목표 지점에 도달했는지 검사하는 헬퍼 함수
- * @param row 행 인덱스
- * @param col 열 인덱스
- * @param goal 목표 지점
+ * @param row 현재 행 인덱스
+ * @param col 현재 열 인덱스
+ * @param goal 목표 지점 좌표
+ * @return 목표 지점에 도달했다면 true, 아니면 false
  */
 bool is_destination(int row, int col, pair<int, int> goal)
 {
@@ -72,12 +73,13 @@ bool is_destination(int row, int col, pair<int, int> goal)
 }
 
 /**
- * 유클리드 거리 측정법으로 휴리스틱(h)을 검사하는 헬퍼 함수
+ * 유클리드 거리 휴리스틱 함수
  * @param row 행 인덱스
  * @param col 열 인덱스
  * @param goal 목표 지점
+ * @return 휴리스틱 값 (유클리드 거리)
  */
-double calculate_h_value(int row, int col, pair<int, int> goal)
+double heuristic(int row, int col, pair<int, int> goal)
 {
     return (double)(sqrt(pow(row - goal.first, 2) +
                          pow(col - goal.second, 2)));
@@ -89,7 +91,7 @@ double calculate_h_value(int row, int col, pair<int, int> goal)
  * @param goal 목표 지점
  * @return 목표지점까지의 경로
  */
-vector<pair<int, int>> trace_path(cell cell_details[][g_col], pair<int, int> goal)
+vector<pair<int, int>> trace_path(Cell cell_details[][g_col], pair<int, int> goal)
 {
     int row = goal.first;
     int col = goal.second;
@@ -135,7 +137,7 @@ vector<pair<int, int>> astar_search(int grid[][g_col], const pair<int, int> star
         return vector<pair<int, int>>{start};
     }
 
-    cell cell_details[g_row][g_col];
+    Cell cell_details[g_row][g_col];
     int i = start.first;
     int j = start.second;
     cell_details[i][j].parent_i = i;
@@ -161,7 +163,7 @@ vector<pair<int, int>> astar_search(int grid[][g_col], const pair<int, int> star
         closed_list[i][j] = true;
 
         /*
-         All the 8 successor of this cell
+         All the 8 successor of this Cell
 
                NW   N   NE
                  \  |  /
@@ -210,7 +212,7 @@ vector<pair<int, int>> astar_search(int grid[][g_col], const pair<int, int> star
                 {
                     // 상하좌우 이동 비용: 1, 대각선 이동 비용: 1.414(√2)
                     double new_g = cell_details[i][j].g + ((d < 4) ? 1.0 : 1.414);
-                    double new_h = calculate_h_value(ni, nj, goal);
+                    double new_h = heuristic(ni, nj, goal);
                     double new_f = new_g + new_h;
 
                     if (cell_details[ni][nj].f == FLT_MAX ||
@@ -233,7 +235,7 @@ vector<pair<int, int>> astar_search(int grid[][g_col], const pair<int, int> star
 
 int main()
 {
-    // 0 은 갈 수 있는 경로, 1 은 막혀있는 경로
+    // 1 = 이동 가능, 0 = 장애물
     int grid[g_row][g_col] = {{1, 0, 1, 1, 1, 1, 0, 1, 1, 1},
                               {1, 1, 1, 0, 1, 1, 1, 0, 1, 1},
                               {1, 1, 1, 0, 1, 1, 0, 1, 0, 1},
@@ -245,16 +247,24 @@ int main()
                               {1, 1, 1, 0, 0, 0, 1, 0, 0, 1}};
 
     pair<int, int> start = {0, 0};
-    pair<int, int> goal = {0, 0};
+    pair<int, int> goal = {8, 0};
 
     auto path = astar_search(grid, start, goal);
 
-    // 출력하기
-    cout << "[경로]\n";
-    for (auto [i, j] : path)
+    if (!path.empty())
     {
-        cout << "-> (" << i << ", " << j << ") ";
+        cout << "[경로]\n";
+        for (auto &[x, y] : path)
+        {
+            cout << "-> (" << x << ", " << y << ")";
+        }
+        cout << ": 도착\n";
     }
+    else
+    {
+        cout << "경로를 찾지 못했습니다.\n";
+    }
+
 
     return 0;
 }
