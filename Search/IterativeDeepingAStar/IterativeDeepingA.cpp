@@ -1,5 +1,5 @@
 /*
- * 반복 깊이증가 A* (Iterative Deepening A*)
+ * 반복 깊이 증가 A* (Iterative Deepening A*)
  *
  * A* 알고리즘의 메모리 문제를 해결하기 위해 깊이 우선 탐색(DFS)과
  * A*의 평가 함수 개념을 결합한 알고리즘입니다.
