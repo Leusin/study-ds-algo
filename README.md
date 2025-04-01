@@ -26,7 +26,7 @@
         - Selection Sort(선택 정렬)
 - Data Structures(자료구조)
     - Abstract Data Types(추상적 자료구조)
-        - Dequeue덱)
+        - Dequeue(덱)
         - Queue(큐)
         - Stack(스택)
         - Priority Queue (우선순위 큐)
