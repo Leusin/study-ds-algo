@@ -25,11 +25,12 @@
         - Radix Sort(기수 정렬)
         - Selection Sort(선택 정렬)
 - Data Structures(자료구조)
-    - Abstract Data Types(추상적 자료구조)
-        - Dequeue(덱)
+    - Linear(선형 자료구조)
+        - Deque(덱)
         - Queue(큐)
         - Stack(스택)
-        - Priority Queue (우선순위 큐)
+    - NonLinear(비선형 자료구조)
+    - Hashing(해싱 자료구조)
 
 # 3. 업데이트 로그
 
