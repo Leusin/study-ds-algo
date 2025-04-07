@@ -1,4 +1,3 @@
-
 /*
  * 연결 리스트 기반 스택 
  * 
@@ -32,13 +31,12 @@ public:
 
 class Stack
 {
-    // 가장 위(top)의 요소
-    Node *head;
+    Node *top;
 
 public:
     Stack()
     {
-        head = nullptr;
+        top = nullptr;
     }
 
     void push(int new_data)
@@ -48,9 +46,9 @@ public:
             // 노드 초기화 및 값 업데이트
             Node *new_node = new Node(new_data);
             // 링크 연결하기
-            new_node->next = head;
+            new_node->next = top;
             // top 요소 업데이트
-            head = new_node;
+            top = new_node;
         }
         /**
          * 일반적으로 연결 리스트 기반의 스택에서는 오버플로우가
@@ -74,15 +72,16 @@ public:
         }
         else
         {
-            // 최상위 노드 포인터를 임시 포인트로 설정한 뒤
-            Node *temp = head;
-            // 그 다음 1단계 연결된 노드를 최상위 노드로 변경
-            head = head->next;
+            // 최상위 노드 포인터를 임시 포인트로 설정
+            Node *temp = top;
+            // 한 단계 이전에 연결된 노드를 최상위 노드로 변경
+            top = top->next;
+
             delete temp;
         }
     }
 
-    int top()
+    int peek()
     {
         // 존재하는 요소가 있는지 검사합니다.
         if (is_empty())
@@ -90,7 +89,7 @@ public:
             throw runtime_error("Stack is empty");
         }
         // 최상위 노드의 값을 반환합니다.
-        return head->data;
+        return top->data;
     }
 
     /**
@@ -98,7 +97,7 @@ public:
      */
     bool is_empty()
     {
-        return head == nullptr;
+        return top == nullptr;
     }
 };
 
@@ -111,27 +110,27 @@ int main()
     st.push(20);
     st.push(30);
 
-    cout << "현재 스택의 최상단 값: " << st.top() << endl;
+    cout << "현재 스택의 최상단 값: " << st.peek() << endl;
 
     cout << "\n스택에서 두 개의 값을 제거합니다." << endl;
     st.pop();
     st.pop();
 
-    cout << "현재 스택의 최상단 값: " << st.top() << endl;
+    cout << "현재 스택의 최상단 값: " << st.peek() << endl;
 
     cout << "\n스택에서 남은 값들을 모두 제거합니다..." << endl;
     st.pop();
 
-    cout << "스택이 비어있습니까? " << (st.is_empty() ? "네" : "아니오") << endl;
+    cout << "스택이 비어있습니까?: " << (st.is_empty() ? "네" : "아니오") << endl;
 
-    cout << "\n비어있는 스택에서 top() 호출 시도.." << endl;
+    cout << "\n비어있는 스택에서 peek() 호출 시도..." << endl;
     try
     {
-        cout << "현재 스택의 최상단 값: " << st.top() << endl;
+        cout << "현재 스택의 최상단 값: " << st.peek() << endl;
     }
     catch (const exception &e)
     {
-        cout << "오류 발생: " << e.what() << endl;
+        cout << "(오류 발생) " << e.what() << endl;
     }
 
     return 0;
