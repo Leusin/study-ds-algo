@@ -1,14 +1,14 @@
 /*
  * C++ STL 의 스택
  *
- * C++ 표준 라이브러리에서 제공하는 스택 자료구조입니다. 내부적으로는
- * vector, list 등 다른 컨테이너를 감싸는 container adapter
- * 형태로 구현되어 있습니다.
+ * C++ 표준 라이브러리에서 제공하는 스택 자료구조입니다. 내부적으로는 다른 
+ * 컨테이너를 감싸는 container adapter 형태로 구현되어 있습니다.
  *
  */
 
 #include <iostream>
 #include <stack>
+
 using namespace std;
 
 int main()
