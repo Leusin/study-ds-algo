@@ -51,8 +51,6 @@ FIFO(First In, First Out) 원칙을 따르는 선형 자료구조로, 가장 먼
 
 C++ 표준 라이브러리에서 제공하는 큐 자료구조입니다. 내부적으로는 다른 컨테이너를 감싸는 container adapter 형태로 구현되어 있습니다.
 
----
-
 # # 참고
 
 - [Introduction to Queue Data Structure | GeeksforGeeks](https://www.geeksforgeeks.org/introduction-to-queue-data-structure-and-algorithm-tutorials/)
