@@ -1,12 +1,15 @@
 /*
  * 동적 배열 기반 우선순위 큐
  *
- * 동적 배열(std::vector)을 감싸 간단하게 큐를 구현합니다.
- * enqueue의 시간 복잡도는 O(1), dequeue 와 peek는 O(n)으로
- * 상대적으로 비효율적인 편입니다.
+ * 동적 배열(std::vector)을 감싸 간단히 구현했으며, 다음 차례인 
+ * 요소를 탐색(peek)할 때마다 우선순위가 높은 요소를 찾습니다.
+ * 
+ * 삽입(enqueue)의 시간 복잡도는 O(1), 삭제(dequeue) 와 
+ * 탐색(peek)은 O(n)으로 상대적으로 비효율적인 편입니다.
  *
  * 이 구현은 학습 목적이거나, 데이터 수가 적고 간단한 경우에 적합합니다.
  * 성능이 중요한 상황에서는 heap 기반(priority_queue 등) 구조를 사용해야 합니다.
+ * 
  */
 
 #include <iostream>
@@ -33,7 +36,7 @@ public:
     void dequeue()
     {
         int index = peek_index();
-        
+
         if (index == -1)
         {
             throw runtime_error("Queue is Underflow");
@@ -105,7 +108,7 @@ int main()
     cout << "\n비어있는 큐에서 peek_value() 호출 시도..." << endl;
     try
     {
-        cout << "현재 스택의 최상단 값: " << pq.peek_value() << endl;
+        cout << "현재 큐의 최상단 값: " << pq.peek_value() << endl;
     }
     catch (const exception &e)
     {

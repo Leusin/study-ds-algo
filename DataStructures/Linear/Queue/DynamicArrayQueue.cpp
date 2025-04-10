@@ -75,7 +75,7 @@ int main()
     cout << "\n비어있는 큐에서 peek() 호출 시도..." << endl;
     try
     {
-        cout << "현재 스택의 최상단 값: " << q.peek() << endl;
+        cout << "현재 큐의 최상단 값: " << q.peek() << endl;
     }
     catch (const exception &e)
     {
