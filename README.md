@@ -30,14 +30,19 @@
             - Circular Deque(원형 덱)
             - Double Linked List Deque(이중 연결 덱)
             - STL Deque(표준 라이브러리 덱)
+        - Priority Queue(큐)
+            - Binary Heap Priority Queue(이진 힙 우선순위 큐)
+            - Dynamic Array Priority Queue(동적 배열 우선순위 큐)
+            - Linked List Priority Queue(연결 리스트 우선순위 큐)
+            - STL Priority Queue(표준 라이브러리 우선순위 큐)
         - Queue(큐)
             - Circular Queue(원형 큐)
             - Dynamic Array Queue(동적 배열 큐)
-            - LinkedList Queue(연결 리스트 큐)
+            - Linked List Queue(연결 리스트 큐)
             - STL Queue(표준 라이브러리 큐)
         - Stack(스택)
             - Dynamic Array Stack(동적 배열 스택)
-            - LinkedList Stack(연결 리스트 스택)
+            - Linked List Stack(연결 리스트 스택)
             - Monotonic Stack(단조 스택)
             - STL Stack(표준 라이브러리 스택)
     - NonLinear(비선형 자료구조)
@@ -56,3 +61,5 @@
 - 2025/04/08 - 자료 구조 큐 예제 업로드 완료
 
 - 2025/04/09 - 자료 구조 덱 예제 업로드 완료
+
+- 2025/04/11 - 자료 구조 우선순위 큐 예제 업로드 완료
