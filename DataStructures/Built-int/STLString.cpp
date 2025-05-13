@@ -2,7 +2,6 @@
 // C++에서 std::string은 표준 라이브러리(STL)에서 제공하는 문자열 클래스입니다.
 // 문자열을 더 쉽게 다루기 위해 제공되며, 내부적으로 char 배열을 감싸고 여러 편의 기능을 제공합니다.
 //
-#include <iostream>
 #include <string>
 
 using namespace std;
@@ -37,5 +36,4 @@ int main()
     
     str6.replace(4, 5, "Apple"); // 인덱스 4부터 5글자를 "Apple"로 대체
 
-    cout << str6 << endl;
 }
