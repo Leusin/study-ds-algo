@@ -25,6 +25,7 @@ int main()
 	 * - 기본 비교는 less<T>, 즉 큰 값이 우선순위가 높음 (최대 힙)
 	 */
 	priority_queue<int> pq;
+	priority_queue<int, vector<int>, greater<int>> min_pq; // 가장 작은 값이 우선순위 높음
 
 	// 1. 요소 삽입 함수: push()
 	/*
