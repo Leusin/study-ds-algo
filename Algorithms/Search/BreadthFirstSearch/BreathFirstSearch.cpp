@@ -72,7 +72,7 @@ vector<int> bfs_from_source(const vector<vector<int>> &graph, int start_node)
  * @param graph 탐색할 인접 리스트 그래프
  * @return 탐색 경로
  */
-vector<int> dfs_disconnected(vector<vector<int>> &graph)
+vector<int> bfs_disconnected(vector<vector<int>> &graph)
 {
     // 방문한 노드들을 저장할 벡터
     vector<int> path;
@@ -170,9 +170,9 @@ int main(void)
     cout << "연결되지 않은 그래프의 탐색(bfs_from_source): ";
     print_vector(result2);
 
-    auto result3 = dfs_disconnected(graph_disconnected);
+    auto result3 = bfs_disconnected(graph_disconnected);
     
-    cout << "연결되지 않은 그래프의 탐색(dfs_disconnected): ";
+    cout << "연결되지 않은 그래프의 탐색(bfs_disconnected): ";
     print_vector(result3);
 
     return 0;
