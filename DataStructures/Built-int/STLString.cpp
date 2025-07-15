@@ -36,4 +36,7 @@ int main()
     
     str5.replace(4, 5, "Apple"); // 인덱스 4부터 5글자를 "Apple"로 대체
 
+    /* 문자열 자르기 */
+    string str6 ="0123456789abcdefghij"; // size 가 21(0 ~ 20) 인 문자열
+    string sub1 = str6.substr(0, 4); // 0번째 자리 문자 부터 4개 길이의 문자열 ("0123")
 }
